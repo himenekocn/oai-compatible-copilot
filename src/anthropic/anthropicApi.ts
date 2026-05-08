@@ -200,6 +200,26 @@ export class AnthropicApi extends CommonApi<AnthropicMessage, AnthropicRequestBo
 			}
 		}
 
+		// Reasoning / thinking configuration.
+		// Anthropic accepts a top-level `thinking` object. Newer Claude Code-compatible
+		// revisions also accept an `effort` hint (e.g. "low" | "medium" | "high")
+		// in addition to (or instead of) an explicit `budget_tokens` value.
+		const thinkingType = um?.thinking?.type;
+		const thinkingBudget = um?.thinking_budget;
+		const reasoningEffort = um?.reasoning_effort;
+		if (thinkingType !== undefined || thinkingBudget !== undefined || reasoningEffort !== undefined) {
+			const thinkingObj: NonNullable<AnthropicRequestBody["thinking"]> = {
+				type: "adaptive",
+			};
+			if (thinkingBudget !== undefined) {
+				thinkingObj.budget_tokens = thinkingBudget;
+			}
+			if (reasoningEffort !== undefined) {
+				thinkingObj.effort = reasoningEffort;
+			}
+			rb.thinking = thinkingObj;
+		}
+
 		// Process extra configuration parameters
 		if (um?.extra && typeof um.extra === "object") {
 			// Add all extra parameters directly to the request body

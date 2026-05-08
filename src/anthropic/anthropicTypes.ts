@@ -66,8 +66,15 @@ export interface AnthropicRequestBody {
 	};
 	service_tier?: "auto" | "standard_only";
 	thinking?: {
-		type: "enabled";
-		budget_tokens: number;
+		type: "adaptive";
+		budget_tokens?: number;
+		/**
+		 * Reasoning effort hint (e.g. "low" | "medium" | "high").
+		 * Mirrors the `reasoning_effort` parameter used by Claude Code / newer Anthropic
+		 * Messages API revisions. Either `effort` or `budget_tokens` (or both) may be set;
+		 * providers that don't recognize `effort` will simply ignore it.
+		 */
+		effort?: string;
 	};
 	tools?: AnthropicToolDefinition[];
 	tool_choice?: AnthropicToolChoice;
