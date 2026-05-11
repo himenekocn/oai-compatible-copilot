@@ -553,9 +553,9 @@ export class GeminiApi extends CommonApi<GeminiChatMessage, GeminiGenerateConten
 		}): boolean => {
 			return Boolean(
 				extracted.toolResults.length > 0 &&
-				!extracted.text &&
-				extracted.imageParts.length === 0 &&
-				extracted.toolCalls.length === 0
+					!extracted.text &&
+					extracted.imageParts.length === 0 &&
+					extracted.toolCalls.length === 0
 			);
 		};
 
@@ -752,7 +752,11 @@ export class GeminiApi extends CommonApi<GeminiChatMessage, GeminiGenerateConten
 		if (um?.extra && typeof um.extra === "object") {
 			for (const [key, value] of Object.entries(um.extra)) {
 				if (value !== undefined) {
-					rb[key] = value;
+					if (key === "tools" && Array.isArray(value) && rb.tools) {
+						rb.tools = [...rb.tools, ...value];
+					} else {
+						rb[key] = value;
+					}
 				}
 			}
 		}

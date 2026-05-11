@@ -205,7 +205,11 @@ export class AnthropicApi extends CommonApi<AnthropicMessage, AnthropicRequestBo
 			// Add all extra parameters directly to the request body
 			for (const [key, value] of Object.entries(um.extra)) {
 				if (value !== undefined) {
-					(rb as unknown as Record<string, unknown>)[key] = value;
+					if (key === "tools" && Array.isArray(value) && rb.tools) {
+						rb.tools = [...rb.tools, ...value];
+					} else {
+						(rb as unknown as Record<string, unknown>)[key] = value;
+					}
 				}
 			}
 		}

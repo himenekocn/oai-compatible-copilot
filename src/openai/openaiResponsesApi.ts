@@ -277,7 +277,11 @@ export class OpenaiResponsesApi extends CommonApi<ResponsesInputItem, Record<str
 						rb.reasoning = { ...(rb.reasoning as Record<string, unknown>), ...(value as Record<string, unknown>) };
 						continue;
 					}
-					rb[key] = value;
+					if (key === "tools" && Array.isArray(value) && Array.isArray(rb.tools)) {
+						rb.tools = [...rb.tools, ...value];
+					} else {
+						rb[key] = value;
+					}
 				}
 			}
 		}
