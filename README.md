@@ -1,11 +1,17 @@
-# 🤗 OAI Compatible Provider for Copilot
+<div align="center">
+
+<img src="assets/logo.png" alt="OAICopilot Logo" width="120" height="120">
+
+# OAI Compatible Provider for Copilot
+
+**A VSCode extension to use OpenAI/Ollama/Anthropic/Gemini API Providers in GitHub Copilot Chat** 🔥
+
+English | [简体中文](README.zh-CN.md)
+
+</div>
 
 [![CI](https://github.com/JohnnyZ93/oai-compatible-copilot/actions/workflows/release.yml/badge.svg)](https://github.com/JohnnyZ93/oai-compatible-copilot/actions)
 [![License](https://img.shields.io/github/license/JohnnyZ93/oai-compatible-copilot?color=orange&label=License)](https://github.com/JohnnyZ93/oai-compatible-copilot/blob/main/LICENSE)
-
-Use frontier open LLMs like GPT 5.2, Gemini 3, Kimi K2.5, DeepSeek V3.2, GLM 4.7, Minimax 2.1, Qwen3 Coder and more in VS Code with GitHub Copilot Chat powered by any OpenAI-compatible provider 🔥
-
-‼️ **Important**: This extension is not currently available to Copilot Business or Copilot Enterprise users. [FYI](https://code.visualstudio.com/docs/copilot/customization/language-models#_bring-your-own-language-model-key)
 
 ## ✨ Features
 - **Multi-API support**: OpenAI/Ollama/Anthropic/Gemini APIs (ModelScope, SiliconFlow, DeepSeek...)

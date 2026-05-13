@@ -252,7 +252,11 @@ export class OpenaiApi extends CommonApi<OpenAIChatMessage, Record<string, unkno
 			// Add all extra parameters directly to the request body
 			for (const [key, value] of Object.entries(um.extra)) {
 				if (value !== undefined) {
-					rb[key] = value;
+					if (key === "tools" && Array.isArray(value) && Array.isArray(rb.tools)) {
+						rb.tools = [...rb.tools, ...value];
+					} else {
+						rb[key] = value;
+					}
 				}
 			}
 		}
